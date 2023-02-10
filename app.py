@@ -227,10 +227,11 @@ def save_picture(image):
     f_name,f_ext=os.path.splitext(image.filename)
     new_name=random_hex+f_ext
     picture_path = os.path.join(app.root_path,'static/profile_pics',new_name)
-    output_size=(125,125)
-    i=Image.open(image)
-    i.thumbnail(output_size)
-    i.save(picture_path)
+    image.save(picture_path)
+    # output_size=(125,125)
+    # i=Image.open(image)
+    # i.thumbnail(output_size)
+    # i.save(picture_path)
     return new_name
     
     
