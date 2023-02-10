@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content-section">
+      <div class="media">
+        <img class="rounded-circle account-img" src="{{ images }}">
+        <div class="media-body">
+          <h2 class="account-heading">{{ current_user.username }}</h2>
+          <p class="text-secondary">{{ current_user.email }}</p>
+        </div>
+      </div>
+    </div>
+<form method='POST' enctype='multipart/form-data'>
+    {{ form.hidden_tag() }}
+    {{form.username.label}}
+    {%if form.username.errors %}
+    {{form.username(class="form-control-file")}} 
+    <div class="invalid-feedback">
+        {% for i in form.username.errors %}
+        <span>{{i}}</span>
+        {%endfor%}
+    </div>
+    {%else%}
+    {{form.username(class="form-control form-control-lg")}} 
+    {% endif %}  
+    {{form.email.label}}
+    {%if form.email.errors %}
+    {{form.email(class="form-control form-control-lg is-invalid")}} 
+    <div class="invalid-feedback">
+        {% for i in form.email.errors %}
+        <span>{{i}}</span>
+        {%endfor%}
+    </div>
+    {%else%}
+    {{form.email(class="form-control form-control-lg")}} 
+    {% endif %} 
+    {{form.picture.label()}}
+    {%if form.picture.errors %}
+    {{form.picture(class="form-control-file")}} 
+    <div class="form-data">
+        {% for i in form.picture.errors %}
+        <span class='text-danger'>{{i}}</span>
+        {%endfor%}
+    </div>
+    {%else%}
+    {{form.picture(class="form-control-file")}} 
+    {% endif %} 
+    <br>
+    {{form.submit(class="btn btn-outline-info")}}
+</form> 
+{% endblock content %}
