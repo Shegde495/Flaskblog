@@ -148,8 +148,8 @@ login_manager = LoginManager(app)
 login_manager.login_view='login'
 
 @login_manager.user_loader
-def load_user(user_id):
-    return USER.query.get(int(user_id))
+def load_user(id):
+    return USER.query.get(int(id))
 
     
     
@@ -367,3 +367,210 @@ def error_404(e):
 
 if __name__ == '__main__':
     app.run(debug=True)
+    
+    
+    
+    {
+    "openapi": "3.0.0",
+    "info": {
+      "version": "1.0.0",
+      "title": "Bookmark Api "
+    },
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "http",
+          "scheme": "bearer",
+          "bearerFormat": "JWT"
+        }
+      }
+    },
+   
+
+    "tags": [
+    {
+      "name": "List of actions",
+      "description": "Flask API"
+    }
+  ],
+  "servers": [
+    {
+    "url": "/"
+    }
+],
+"paths": {
+  "/api": {
+      "post": {
+      "tags": [
+          "Registration"
+      ],
+      "summary": "Register",
+      "requestBody": {
+      "description": "Register",
+      "required": true,
+      "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                  "username": {
+                  "type": "string"
+                  },
+                  "email": {
+                  "type": "string"
+                  },
+                  "password":{
+                      "type": "string"
+                  },
+                  "password_confirmation":{
+                      "type": "string"
+                  }
+              }
+              }
+              }
+          }
+      },
+      "responses": {
+          "200": {
+              "description": "OK"
+              }
+          },
+          "404": {
+              "description": "NOT FOUND"
+      }
+      }
+      },
+      "/api/login":{
+        "post": {
+          "tags": [
+              "LOGIN"
+          ],
+          "summary": "Login form",
+          "requestBody": {
+          "description": "Login",
+          "required": true,
+          "content": {
+              "application/json": {
+              "schema": {
+                  "type": "object",
+                  "properties": {
+                      "email": {
+                      "type": "string"
+                      },
+                      "password":{
+                          "type": "string"
+                      }
+                    }
+                  }}}},
+                  "responses": {
+                      "200": {
+                          "description": "OK"
+                          }
+                      },
+                      "404": {
+                          "description": "NOT FOUND"
+                  }
+                }},
+ "/api/bookmark":
+                {
+                  "get": {
+                    "tags": [
+                        "Bookmarks"
+                    ],
+                    "security": [
+                      {
+                        "bearerAuth": []
+                      }
+                    ],
+                    "summary": "books",
+                    "requestBody": {
+                    "content": {
+                        "application/json": {
+                       }}},
+                            "responses": {
+                                "200": {
+                                    "description": "OK"
+                                    }
+                                },
+                                "404": {
+                                    "description": "NOT FOUND"
+                            }
+                          },
+                    "post":{
+                      "tags":[
+                        "Bookmarks"
+                      ],
+                      "security": [
+                        {
+                          "bearerAuth": []
+                        }
+                      ],
+                    "summary": "Adding new bookmarks",
+                      "requestBody":{
+                        "content":{
+                          "application/json":{
+                            "schema": {
+                              "type": "object",
+                              "properties": {
+                                  "body": {
+                                  "type": "string"
+                                  }
+                                }
+                              }
+
+                          }
+                        }
+                      },
+                      
+                      "responses": {
+                        "200": {
+                            "description": "OK"
+                            }
+                        },
+                        "404": {
+                            "description": "NOT FOUND"
+                    }
+
+
+                    }
+                        
+                        },
+                        "/api/bookmark/{id}":{
+
+                          "get" :{
+                              "tags": [
+                                  "Get todos from API"
+                              ],
+                              "summary": "Get todos",
+                              "parameters": [{
+                                "name": "id",
+                                "in": "path",
+                                "description": "bookmarks id to update",
+                                "required": true,
+                                "type": "integer"
+                              }],
+                              "security": [
+                                {
+                                  "bearerAuth": []
+                                }
+                              ],
+                              "responses": {
+                              "200": {
+                                  "description": "OK"
+                              },
+                              "404": {
+                                  "description": "NOT FOUND"
+                                  }
+                          }
+                          }
+                          }                         
+                
+                
+                
+                
+                
+                
+                        }}
+
+
+    
